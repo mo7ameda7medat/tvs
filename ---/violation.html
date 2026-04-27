@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إصدار مخالفة - نظام إدارة المخالفات المرورية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="stylesheet" href="assets/css/form.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- الشريط الجانبي -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="16" fill="#c9a227"/>
+          <path d="M10 22l4-10h8l4 10" stroke="#0b2d4d" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="14" cy="23" r="2" fill="#0b2d4d"/>
+          <circle cx="22" cy="23" r="2" fill="#0b2d4d"/>
+        </svg>
+      </div>
+      <div class="sidebar-title">نظام المخالفات</div>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+          <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+          <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+          <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>لوحة التحكم</span>
+      </a>
+      <a href="issue-violation.html" class="nav-item active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>إصدار مخالفة</span>
+      </a>
+      <a href="violations-list.html" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>المخالفات</span>
+      </a>
+      <a href="search-violation.html" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+          <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>بحث</span>
+      </a>
+      <a href="profile.html" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>الملف الشخصي</span>
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="logout()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>تسجيل الخروج</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <div class="header-right">
+        <h1>إصدار مخالفة جديدة</h1>
+        <p class="welcome-text">تسجيل مخالفة مرورية في النظام</p>
+      </div>
+    </header>
+
+    <div class="form-container">
+      <form class="issue-form" id="issueForm" onsubmit="submitViolation(event)">
+        <!-- بيانات الشرطي التلقائية -->
+        <div class="form-section auto-data">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            بيانات الشرطي (تلقائي)
+          </h3>
+          <div class="auto-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2"/>
+              <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            يتم ملؤها تلقائياً من بيانات الدخول
+          </div>
+          <div class="grid-3">
+            <div class="form-group">
+              <label class="form-label">اسم الشرطي</label>
+              <input type="text" class="form-input" id="officerName" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">الرتبة</label>
+              <input type="text" class="form-input" id="officerRank" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">الرقم الوظيفي</label>
+              <input type="text" class="form-input" id="officerId" readonly>
+            </div>
+          </div>
+        </div>
+
+        <!-- بيانات المخالفة -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            بيانات المخالفة
+          </h3>
+          
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">رقم رخصة السائق *</label>
+              <input type="text" class="form-input" placeholder="مثال: LIC-2024-12345" required id="licenseNumber">
+            </div>
+            <div class="form-group">
+              <label class="form-label">رقم لوحة المركبة *</label>
+              <input type="text" class="form-input" placeholder="مثال: ط ر ب 123" required id="plateNumber">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">نوع المركبة *</label>
+              <select class="form-input" required id="vehicleType">
+                <option value="">اختر النوع</option>
+                <option value="سيارة خاصة">سيارة خاصة</option>
+                <option value="سيارة أجرة">سيارة أجرة</option>
+                <option value="حافلة">حافلة</option>
+                <option value="شاحنة">شاحنة</option>
+                <option value="دراجة نارية">دراجة نارية</option>
+                <option value="أخرى">أخرى</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">نوع المخالفة *</label>
+              <select class="form-input" required id="violationType">
+                <option value="">اختر المخالفة</option>
+                <option value="تجاوز السرعة المقررة">تجاوز السرعة المقررة</option>
+                <option value="وقوف خاطئ">وقوف خاطئ</option>
+                <option value="عدم ربط حزام الأمان">عدم ربط حزام الأمان</option>
+                <option value="استخدام الهاتف أثناء القيادة">استخدام الهاتف أثناء القيادة</option>
+                <option value="عدم إعطاء الأولوية">عدم إعطاء الأولوية</option>
+                <option value="قطع الإشارة الحمراء">قطع الإشارة الحمراء</option>
+                <option value="أخرى">أخرى</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">تاريخ المخالفة *</label>
+              <input type="date" class="form-input" required id="violationDate">
+            </div>
+            <div class="form-group">
+              <label class="form-label">وقت المخالفة *</label>
+              <input type="time" class="form-input" required id="violationTime">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">موقع المخالفة *</label>
+            <input type="text" class="form-input" placeholder="مثال: شارع الجمهورية - أمام المستشفى" required id="violationLocation">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">المبلغ (د.ل) *</label>
+            <input type="number" class="form-input" placeholder="مثال: 150" min="0" required id="violationAmount">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ملاحظات إضافية</label>
+            <textarea class="form-input" rows="3" placeholder="أي معلومات إضافية..." id="violationNotes"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="window.location.href='dashboard.html'">إلغاء</button>
+          <button type="submit" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            إصدار المخالفة
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- نافذة التأكيد -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content">
+      <div class="modal-icon success">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#2e7d32" stroke-width="2"/>
+          <path d="M8 12l3 3 5-6" stroke="#2e7d32" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2>تم إصدار المخالفة بنجاح!</h2>
+      <p>رقم المخالفة: <strong id="newViolationNumber">MXF-2024-00848</strong></p>
+      <button class="btn-primary" onclick="closeIssueModal()">حسناً</button>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/issue-violation.js"></script>
+</body>
+</html>
