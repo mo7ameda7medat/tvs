@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز الدفع - نظام المخالفات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="16" fill="#c9a227"/>
+          <path d="M10 22l4-10h8l4 10" stroke="#0b2d4d" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="sidebar-title">مركز الدفع</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="payment-dashboard.html" class="nav-item active">🔍 البحث والاستعلام</a>
+      <a href="#" class="nav-item" onclick="showCustomAlert('سجل المدفوعات قيد التطوير','info')">💰 سجل السداد</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="logout()">🚪 تسجيل الخروج</button>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <div class="header-right">
+        <h1>مركز معالجة ودفع المخالفات</h1>
+        <p class="welcome-text">مرحباً، <span id="centerNameDisplay">مركز الدفع</span></p>
+      </div>
+    </header>
+
+    <div class="content-card">
+      <h3>🔎 البحث عن مخالفة</h3>
+      <div class="search-box">
+        <div class="radio-group">
+          <label><input type="radio" name="searchBy" value="num" checked> رقم المخالفة</label>
+          <label><input type="radio" name="searchBy" value="lic"> رقم الرخصة</label>
+          <label><input type="radio" name="searchBy" value="plt"> رقم اللوحة</label>
+        </div>
+        <div class="search-inputs">
+          <input type="text" class="field-input" id="searchQuery" placeholder="أدخل رقم البحث...">
+          <button class="btn-primary" onclick="searchViolation()">بحث</button>
+        </div>
+      </div>
+
+      <div id="searchResult" class="hidden" style="margin-top:2rem;">
+        <div class="result-card">
+          <div class="result-header">
+            <span class="result-id" id="resId">MXF-2026-001</span>
+            <span class="status-chip" id="resStatus"><span class="dot"></span>غير مدفوعة</span>
+          </div>
+          <div class="result-grid">
+            <div><strong>السائق:</strong> <span id="resDriver">محمد أحمد</span></div>
+            <div><strong>المركبة:</strong> <span id="resVehicle">سيارة خاصة - 12345</span></div>
+            <div><strong>المخالفة:</strong> <span id="resType">تجاوز السرعة</span></div>
+            <div><strong>المبلغ:</strong> <span id="resAmount" style="color:var(--accent-blue);font-weight:700;">150 د.ل</span></div>
+            <div><strong>الشرطي المصدر:</strong> <span id="resOfficer">ملازم أحمد</span></div>
+            <div><strong>التاريخ:</strong> <span id="resDate">2026-04-20</span></div>
+          </div>
+          <div class="action-btns">
+            <button class="btn-primary green" id="payBtn" onclick="simulatePayment()">💳 محاكاة الدفع الإلكتروني</button>
+            <button class="btn-secondary" onclick="printReceipt()">🖨️ طباعة إيصال</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="payModal">
+    <div class="modal-content">
+      <div class="modal-icon success"><svg width="60" height="60" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2e7d32" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2e7d32" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <h2>تم السداد بنجاح!</h2>
+      <p>تم تحديث حالة المخالفة إلى: <strong style="color:var(--accent-green)">مدفوعة ✅</strong></p>
+      <p>رقم العملية: <strong id="payRef">PAY-2026-8892</strong></p>
+      <button class="btn-primary" onclick="closeModal('payModal'); searchViolation()">حسناً</button>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/payment-center.js"></script>
+</body>
+</html>
